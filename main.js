@@ -6,6 +6,7 @@ const numbersEl = document.getElementById('numbers');
 const symbolsEl = document.getElementById('symbols');
 const generateEl = document.getElementById('generate');
 const clipboard = document.getElementById('clipboard');
+const copyInfo = document.querySelector('.copy-info');
 
 const randomFunc = {
 	lower: getRandomLower,
@@ -23,9 +24,13 @@ clipboard.addEventListener('click', () => {
 	textarea.value = password;
 	document.body.appendChild(textarea);
 	textarea.select();
-	document.execCommand('copy');
+  navigator.clipboard.writeText(textarea.value)
 	textarea.remove();
-	alert('Password copied to clipboard');
+  copyInfo.classList.remove('hidden')
+
+  setTimeout(() => {
+    copyInfo.classList.add('hidden')
+  }, 3000)
 });
 
 generate.addEventListener('click', () => {
